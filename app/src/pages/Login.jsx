@@ -112,7 +112,7 @@ const Login = () => {
           <p className="mt-10 text-center text-lg text-gray-900">
             New User?{' '}
             <a href="/signup" className="font-semibold leading-6 text-gray-500 hover:text-indigo-700">
-              Sign In
+              Sign Up
             </a>
           </p>
         </div>
