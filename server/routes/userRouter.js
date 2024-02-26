@@ -20,9 +20,8 @@ router.post('/login', user.login);
 router.get('/getUsers', user.getUsers);
 router.put('/blockUser/:id', user.blockUser);
 router.put('/activeUser/:id', user.activeUser);
-router.put('/editEmail', user.editEmail);
-router.put('/editPassword', user.editPassword);
-router.put('/editProfile', user.editProfile);
-router.put('/editProfilePic',upload.single('file'),user.editProfilePic)
+router.put('/editProfile/:id', user.editProfile);
+
+
 
 module.exports = router;

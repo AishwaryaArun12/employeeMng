@@ -6,27 +6,33 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from '../axiosConfig'
 import { useNavigate } from 'react-router-dom';
 
-const Signup = () => {
+const Login = () => {
     const [emailError, setEmailError] = useState('');
     const {register,handleSubmit} = useForm();
     const navigate = useNavigate();
     const submit = async(data)=>{
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const nameRegex = /^[a-zA-Z]{2,}(?:[' -][a-zA-Z]+)*$/;
         if(!emailRegex.test(data.email.trim()) || data.email.trim() == ""){
             setEmailError('Email not valid')
-          }else if(!nameRegex.test(data.name.trim()) || data.name.trim() == ""){
-            toast('Name should be alphabets and minimum length of 2 ')
-           }else{
+          }else{
             try {
-               const res = await axios.post('/register',data);
+               const res = await axios.post('/login',data);
                if(res.status == 200){
+                 localStorage.setItem('token',res.data.token);
+                 localStorage.setItem('id',res.data.user._id)
+                 localStorage.setItem('user',JSON.stringify(res.data.user));
+                 if(res.data.admin){
+                    localStorage.setItem('loginAdmin', true);
+                    navigate('/admin');
+                 }else{
+                    localStorage.setItem('loginUser', true);
+                    navigate('/');
+                 }
                  
-                    navigate('/login');
                } 
             } catch (error) {
-                if(error.response.status == 409){
-                    toast('Sorry, User already exist')
+                if(error.response.status == 401){
+                    toast('Sorry, Invalid Credential')
                 }
             }
           }
@@ -43,29 +49,12 @@ const Signup = () => {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Register Your Account
+            Sign in to your account
           </h2>
         </div>
 
         <div className="mt-10  sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit(submit)}>
-          <div>
-              <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
-                Name
-              </label>
-              <div className="mt-2">
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  autoComplete="name"
-                  required
-                  {...register('name')}
-                  className=" bg-gray-200 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-              <p className='text-red-800'>{emailError}</p>
-            </div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -110,15 +99,15 @@ const Signup = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-gradient-to-br from-gray-900 via-gray-500 to-gray-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign up
+                Sign in
               </button>
             </div>
           </form>
 
           <p className="mt-10 text-center text-lg text-gray-900">
-            Already registered?{' '}
-            <a href="/login" className="font-semibold leading-6 text-gray-500 hover:text-indigo-700">
-              Sign in
+            New User?{' '}
+            <a href="/signup" className="font-semibold leading-6 text-gray-500 hover:text-indigo-700">
+              Sign In
             </a>
           </p>
         </div>
@@ -127,4 +116,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default Login

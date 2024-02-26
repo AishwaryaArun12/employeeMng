@@ -1,5 +1,5 @@
 const User = require('../model/user');
-const jwt = require('jsonwebtoken');
+const Jwt = require('jsonwebtoken');
 const jwtSecret = 'secretKey1234';
 
 module.exports  = {
@@ -27,7 +27,7 @@ module.exports  = {
                  user = await User.findOne({email: req.body.email,password : req.body.password});
             }
             if(user){
-                const token = jwt.sign({ email : req.body.email }, jwtSecret, { expiresIn: '1h' });
+                const token = Jwt.sign({ email : req.body.email }, jwtSecret, { expiresIn: '1h' });
                req.body.email == 'aishwarya4arun@gmail.com' ? res.status(200).json({token,user,admin : true}) :  res.status(200).json({token,user,admin : false});
             }else{
                 res.status(401).json({error : 'invalid credential'})
@@ -62,44 +62,20 @@ module.exports  = {
             console.log(error)
         }
     },
-    editEmail : async (req,res)=>{
-        try {
-            const {oldEmail,newEmail} = req.body;
-            await User.findOneAndUpdate({email : oldEmail},{email : newEmail});
-            res.status(200).json({data : 'ok'})
-        } catch (error) {
-            console.log(error);
-        }
-    },
-    editPassword : async (req,res)=>{
-        try {
-            const {email,newPassword} = req.body;
-            await User.findOneAndUpdate({email},{password : newPassword});
-            res.status(200).json({data : 'ok'})
-        } catch (error) {
-            console.log(error);
-        }
-    },
+   
+    
+   
     editProfile : async (req,res)=>{
         try {
-            const {email,name,mobile,designation,address} = req.body;
-            await User.findOneAndUpdate({email},{name,mobile,designation,address});
-            res.status(200).json({data : 'ok'})
+            const {id} = req.params;
+            const {name,mobile,designation,address} = req.body;
+            const edit = await User.findOneAndUpdate({_id:id},{name,mobile,designation,address},{new : true});
+            res.status(200).json(edit)
         } catch (error) {
             console.log(error);
         }
     },
-    editProfilePic : async(req,res)=>{
-        try {
-            const {email} = req.body;
-            const filename = `img/${req.file.filename}`
-           const result = await User.findOneAndUpdate({email},{image : filename});
-           console.log(result,req.file,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-            res.status(200).json({data : 'ok'})
-        } catch (error) {
-            console.log(error);
-        }
-    }
+  
 
 }
 
