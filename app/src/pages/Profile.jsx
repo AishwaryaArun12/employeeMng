@@ -9,7 +9,9 @@ const Profile = () => {
     const [user,setUser] = useState({})
    const navigate = useNavigate();
     useEffect(()=>{
-        setUser(JSON.parse(localStorage.getItem('user')))
+        axios.get(`/getUser/${localStorage.getItem('id')}`).then((res)=>{
+            setUser(res.data.user)
+        })
         if(!localStorage.getItem('loginUser')){
             navigate('/login');
         }

@@ -12,16 +12,16 @@ import axios from '../axiosConfig'
 
 export default function Component() {
   const [user,set] = useState({});
-  const {register,handleSubmit} = useForm();
+  const {register,handleSubmit,setValue} = useForm();
   const getUser = async ()=>{
     try {
        const res = await axios.get(`/getUser/${localStorage.getItem('id')}`)
-       
-       set(res.data);
-       setValue('name', res.data.name);
-       setValue('designation', res.data.salary);
-       setValue('mobile', res.data.job);
-       setValue('address', res.data.job);
+       console.log(res)
+       set(res.data.user);
+       setValue('name', res.data.user.name);
+       setValue('designation', res.data.user.designation);
+       setValue('mobile', res.data.user.mobile);
+       setValue('address', res.data.user.address);
     } catch (error) {
         console.log(error,'error');
     }
@@ -45,7 +45,7 @@ export default function Component() {
         }else{
             try {
                 const edit = await axios.put(`/editProfile/${user._id}`,data);
-                 
+                 console.log(edit)
                 onCloseModal();  
             } catch (error) {
                 if(error.response?.status == 409){
@@ -66,12 +66,12 @@ export default function Component() {
     <div className=' bg-cover bg-center h-screen' style={{ backgroundImage: `url(${bg})` }}>
       
     <Nav/>
-          <div className="space-y-6 ">
-            <h3 className="text-xl font-medium text-gray-900 text-center dark:text-white">Edit Profile</h3>
+          <div className="space-y-6 mt-10">
+            <h3 className="text-xl font-medium text-gray-300 text-center dark:text-white">Edit Profile</h3>
             <div className="mt-10  sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6 m-3 items-center" onSubmit={handleSubmit(submit)}>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-400">
                 Name
               </label>
               <div className="mt-2">
@@ -91,7 +91,7 @@ export default function Component() {
             <ToastContainer position="top-center" />
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="salary" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="salary" className="block text-sm font-medium leading-6 text-gray-400">
                   Designation
                 </label>
                 
@@ -113,7 +113,7 @@ export default function Component() {
             </div>
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="mobile" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="mobile" className="block text-sm font-medium leading-6 text-gray-400">
                   Mobile
                 </label>
                 
@@ -132,7 +132,7 @@ export default function Component() {
               </div>
               <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="address" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="address" className="block text-sm font-medium leading-6 text-gray-400">
                   Address
                 </label>
                 
