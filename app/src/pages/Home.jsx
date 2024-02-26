@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Nav from '../components/Nav';
 import Table from '../components/Table';
 import axios from '../axiosConfig';
+import bg from '../assets/bg.webp'
 
 const Home = () => {
     const navigate = useNavigate();
@@ -38,7 +39,7 @@ const Home = () => {
        }
       }
   return (
-    <div className='bg-gradient-to-br from-gray-900 via-gray-600 to-gray-900 h-screen'>
+    <div className=' bg-cover bg-center h-screen' style={{ backgroundImage: `url(${bg})` }}>
      <Nav/>
      <div>
      <input  value={value} onChange={handleChange}  placeholder='Search here....'

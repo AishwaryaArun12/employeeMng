@@ -14,7 +14,7 @@ const Nav = () => {
         navigate('/login');
     }
   return (
-    <div className=' shadow-2xl flex items-center text-gray-300 text-md font-semibold justify-around h-16 bg-gradient-to-br from-gray-900  to-gray-500 w-full'>
+    <div className=' shadow-2xl flex items-center text-gray-300 text-md font-semibold justify-around h-16 bg-transparent border-b w-full'>
         <div>
             <img src={logo2} className='h-12 bg-transparent w-auto rounded-full' alt="" />
         </div>

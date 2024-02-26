@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from '../axiosConfig'
 import { useNavigate } from 'react-router-dom';
 import Nav from '../components/Nav';
+import bg from '../assets/bg.webp'
 
 const AddEmployee = () => {
     const {register,handleSubmit} = useForm();
@@ -30,19 +31,19 @@ const AddEmployee = () => {
 
     }
   return (
-    <div className='bg-gradient-to-br from-gray-900 via-gray-500 to-gray-900 h-screen'>
+    <div className=' bg-cover bg-center h-screen' style={{ backgroundImage: `url(${bg})` }}>
         <Nav/>
-        <div className='"flex min-h-full  flex-1 flex-col justify-center px-6 py-12 lg:px-8"'>
+        <div className='flex min-h-full  flex-1 flex-col  px-6 py-12  lg:px-8'>
       <div>
-      <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+      <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-200">
             Add New Employee
           </h2>
       </div>
       <div>
-      <div className="mt-10  sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit(submit)}>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-200">
                 Name
               </label>
               <div className="mt-2">
@@ -61,7 +62,7 @@ const AddEmployee = () => {
             <ToastContainer position="top-center" />
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="salary" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="salary" className="block text-sm font-medium leading-6 text-gray-200">
                   Salary
                 </label>
                 
@@ -75,14 +76,14 @@ const AddEmployee = () => {
                   required
                   min={0}
                   {...register('salary')}
-                  className="p-3 bg-gray-200 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="p-3 bg-gray-200 block w-full rounded-md border-0 py-1.5 text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             
             </div>
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="job" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="job" className="block text-sm font-medium leading-6 text-gray-200">
                   Job Position
                 </label>
                 
@@ -105,7 +106,7 @@ const AddEmployee = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-gradient-to-br from-gray-900 via-gray-500 to-gray-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-blue-950 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Add Employee
               </button>
