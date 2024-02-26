@@ -3,10 +3,11 @@ import Nav from '../components/Nav'
 import axios,{URL} from '../axiosConfig'
 import Edit from '../components/Edit'
 import bg from '../assets/bg.webp'
+import { useNavigate } from 'react-router-dom'
 
 const Profile = () => {
     const [user,setUser] = useState({})
-   
+   const navigate = useNavigate();
     useEffect(()=>{
         setUser(JSON.parse(localStorage.getItem('user')))
         if(!localStorage.getItem('loginUser')){

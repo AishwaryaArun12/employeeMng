@@ -3,13 +3,14 @@
 
 import { Button, Checkbox, Label, Modal, TextInput } from 'flowbite-react';
 import { useState,useEffect } from 'react';
-import { HiPencil } from 'react-icons/hi';
+import bg from '../assets/bg.webp'
 import { useNavigate, useParams } from 'react-router-dom';
 import React from 'react'
 import {useForm} from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from '../axiosConfig'
+import Nav from './Nav';
 
 export default function Component() {
     let { id } = useParams();
@@ -18,11 +19,11 @@ export default function Component() {
   const getEmployee = async ()=>{
     try {
        const res = await axios.get(`/employee/get/${localStorage.getItem('id')}/${id}`)
+       
        set(res.data.data);
-       setValue('name', res.data.data.name);
-       setValue('designation', res.data.data.designation);
-       setValue('mobile', res.data.data.mobile);
-       setValue('address', res.data.data.address);
+       setValue('name', res.data.data[0].name);
+       setValue('salary', res.data.data[0].salary);
+       setValue('job', res.data.data[0].job);
        
     } catch (error) {
         console.log(error,'error');
@@ -45,16 +46,19 @@ export default function Component() {
         }else if(parseFloat(data.salary)<0){
             toast('Salary should be greater than 0');
         }else{
-            try {
-                const edit = await axios.post(`/employee/edit/${emp._id}`,data);
-                console.log(edit);
-                set(prev=>prev.map(prev=>prev._id == edit.data._id ? edit.data : prev)); 
-                onCloseModal();  
-            } catch (error) {
-                if(error.response?.status == 409){
-                    toast('Employee already exist');
+            
+                try {
+                    console.log('object')
+                    const edit = await axios.post(`/employee/edit/${emp._id}`,data);
+                    console.log(edit,'fffffff');
+                    
+                    onCloseModal();  
+                } catch (error) {
+                    console.log(error)
+                    if(error.response?.status == 409){
+                        toast('Employee already exist');
+                    }
                 }
-            }
         }
 
     }
@@ -65,15 +69,15 @@ export default function Component() {
   }
 
   return (
-    <>
+    <div className=' bg-cover bg-center h-screen' style={{ backgroundImage: `url(${bg})` }}>
       
-      
-          <div className="space-y-6 ">
-            <h3 className="text-xl font-medium text-gray-900 text-center dark:text-white">Edit {emp.name}</h3>
+        <Nav/>
+          <div className="space-y-6 mt-10 ">
+            <h3 className="text-xl font-medium text-gray-200 text-center dark:text-white">Edit {emp.name}</h3>
             <div className="mt-10  sm:mx-auto sm:w-full sm:max-w-sm">
           <form className=" space-y-6 m-3 items-center" onSubmit={handleSubmit(submit)}>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-400">
                 Name
               </label>
               <div className="mt-2">
@@ -92,7 +96,7 @@ export default function Component() {
             <ToastContainer position="top-center" />
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="salary" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="salary" className="block text-sm font-medium leading-6 text-gray-400">
                   Salary
                 </label>
                 
@@ -113,7 +117,7 @@ export default function Component() {
             </div>
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="job" className="block text-sm font-medium leading-6 text-gray-900">
+                <label htmlFor="job" className="block text-sm font-medium leading-6 text-gray-400">
                   Job Position
                 </label>
                 
@@ -153,6 +157,6 @@ export default function Component() {
         </div>
           </div>
        
-    </>
+    </div>
   );
 }

@@ -32,7 +32,7 @@ module.exports = {
             const edit = await Employee.findOneAndUpdate({_id : id},{$set : req.body},{new:true});
             res.status(200).json(edit)
         } catch (error) {
-            console.log(error.message)
+            res.status(200).json(error)
         }
     },
     get : async(req,res)=>{
