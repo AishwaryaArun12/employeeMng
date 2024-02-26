@@ -9,6 +9,7 @@ router.post('/register',user.register);
 router.post('/login', user.login);
 router.get('/getUsers',auth.jwtAuth, user.getUsers);
 router.put('/editProfile/:id',auth.jwtAuth, user.editProfile);
+router.get('/getUser/:id',auth.jwtAuth, user.getUser);
 
 
 

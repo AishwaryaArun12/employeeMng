@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from '../axiosConfig'
 
 export default function Component({user,set}) {
-  const [openModal, setOpenModal] = useState(false);
+  const [user,set] = useState();
   const {register,handleSubmit} = useForm({
     defaultValues : {
         name : user.name,
@@ -21,7 +21,27 @@ export default function Component({user,set}) {
         address : user.address
     }
   });
-  console.log(register)
+  const getUser = async ()=>{
+    try {
+       const res = await axios.get(`/get/${localStorage.getItem('id')}/${id}`)
+       
+       set(res.data.data);
+       setValue('name', res.data.data[0].name);
+       setValue('salary', res.data.data[0].salary);
+       setValue('job', res.data.data[0].job);
+       
+    } catch (error) {
+        console.log(error,'error');
+    }
+}
+  useEffect(()=>{
+      if(!localStorage.getItem('loginUser')){
+          navigate('/login');
+      }else{
+          getUser();
+      }
+  },[])
+
     const navigate = useNavigate();
     const submit = async(data)=>{
         console.log(data)
@@ -47,19 +67,14 @@ export default function Component({user,set}) {
 
 
   function onCloseModal() {
-    setOpenModal(false);
+    navigate('/profile');
    
   }
 
   return (
-    <>
-      <Button onClick={() => setOpenModal(true)} className="font-medium text-gray-300 hover:underline border-gray-500 m-2 items-center flex">
-                <HiPencil/>
-              Edit
-            </Button>
-      <Modal show={openModal} size="sm" onClose={onCloseModal} popup>
-        <Modal.Header />
-        <Modal.Body >
+    <div className=' bg-cover bg-center h-screen' style={{ backgroundImage: `url(${bg})` }}>
+      
+    <Nav/>
           <div className="space-y-6 ">
             <h3 className="text-xl font-medium text-gray-900 text-center dark:text-white">Edit Profile</h3>
             <div className="mt-10  sm:mx-auto sm:w-full sm:max-w-sm">
@@ -168,9 +183,8 @@ export default function Component({user,set}) {
 
         </div>
           </div>
-        </Modal.Body>
-      </Modal>
-    </>
+       
+    </div>
   );
 }
 

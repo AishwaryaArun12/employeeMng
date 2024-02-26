@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Nav from '../components/Nav'
 import axios,{URL} from '../axiosConfig'
-import Edit from '../components/Edit'
+import { HiPencil } from 'react-icons/hi';
 import bg from '../assets/bg.webp'
 import { useNavigate } from 'react-router-dom'
 
@@ -20,7 +20,10 @@ const Profile = () => {
     
 
   <div className="max-w-lg mx-auto my-10 bg-transparent border border-gray-600 rounded-lg shadow-2xl p-5">
-    <Edit user={user} set={setUser}/>
+  <a href='/editProfile' className="font-medium text-gray-300 hover:underline border-gray-500 m-2 items-center flex">
+                <HiPencil/>
+              Edit
+            </a>
     <img className="w-32 h-32 rounded-full mx-auto" src={user.image?.startsWith('http')? user.image : `${URL}/${user.image}`} alt="Profile picture" />
     <h2 className="text-center text-gray-100 text-2xl font-semibold mt-3">{user.name}</h2>
     <p className="text-center text-gray-200 mt-1">{user.designation}</p>

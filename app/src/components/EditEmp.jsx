@@ -13,7 +13,8 @@ import axios from '../axiosConfig'
 import Nav from './Nav';
 
 export default function Component() {
-    let { id } = useParams();
+    const { id } = useParams();
+    console.log(id,'ddd')
     const [emp,set] = useState({});
   const {register,handleSubmit,setValue} = useForm();
   const getEmployee = async ()=>{
@@ -49,7 +50,7 @@ export default function Component() {
             
                 try {
                     console.log('object')
-                    const edit = await axios.post(`/employee/edit/${emp._id}`,data);
+                    const edit = await axios.post(`/employee/edit/${id}`,data);
                     console.log(edit,'fffffff');
                     
                     onCloseModal();  

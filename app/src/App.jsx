@@ -6,7 +6,7 @@ import Home from './pages/Home'
 import AddEmployee from './pages/AddEmployee'
 import Profile from './pages/Profile'
 import EditEmp from './components/EditEmp'
-
+import Edit from './components/Edit';
 function App() {
 
   return (
@@ -19,6 +19,7 @@ function App() {
         <Route exact path='/add' element={<AddEmployee/>}/>
         <Route exact path='/profile' element={<Profile/>}/>
         <Route exact path='/editEmp/:id' element={<EditEmp/>}/>
+        <Route exact path='/editProfile' element={<Edit/>}/>
       </Routes>
     </Router>
      
