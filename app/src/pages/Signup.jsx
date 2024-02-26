@@ -17,6 +17,8 @@ const Signup = () => {
             setEmailError('Email not valid')
           }else if(!nameRegex.test(data.name.trim()) || data.name.trim() == ""){
             toast('Name should be alphabets and minimum length of 2 ')
+           }else if(data.password.trim() == ""){
+            toast('Password should be not be empty')
            }else{
             try {
                const res = await axios.post('/register',data);
