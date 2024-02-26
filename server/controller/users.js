@@ -1,6 +1,7 @@
 const User = require('../model/user');
+require('dotenv').config();
 const Jwt = require('jsonwebtoken');
-const jwtSecret = 'secretKey1234';
+const jwtSecret = process.env.JWT_SECRET;
 
 module.exports  = {
     register : async(req,res)=>{
@@ -27,8 +28,8 @@ module.exports  = {
                  user = await User.findOne({email: req.body.email,password : req.body.password});
             }
             if(user){
-                const token = Jwt.sign({ email : req.body.email }, jwtSecret, { expiresIn: '1h' });
-               req.body.email == 'aishwarya4arun@gmail.com' ? res.status(200).json({token,user,admin : true}) :  res.status(200).json({token,user,admin : false});
+                const token = Jwt.sign({ id:user._id }, jwtSecret, { expiresIn: '1h' });
+                res.status(200).json({token,user,admin : false});
             }else{
                 res.status(401).json({error : 'invalid credential'})
             }
@@ -44,27 +45,8 @@ module.exports  = {
             console.log(error)
         }
     },
-    blockUser : async(req,res)=>{
-        try {
-            const id = req.params.id;
-           await User.findByIdAndUpdate(id,{active: false})
-           res.status(200).json({data : 'ok'})
-        } catch (error) {
-            console.log(error);
-        }
-    },
-    activeUser : async(req,res)=>{
-        try {
-            const id = req.params.id;
-            await User.findByIdAndUpdate(id,{active: true})
-            res.status(200).json({data : 'ok'})
-        } catch (error) {
-            console.log(error)
-        }
-    },
    
     
-   
     editProfile : async (req,res)=>{
         try {
             const {id} = req.params;

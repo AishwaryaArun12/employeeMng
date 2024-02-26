@@ -40,7 +40,7 @@ const Login = () => {
   
 
   return (
-    <div className=' bg-gradient-to-br from-gray-900 via-gray-500 to-gray-900 h-screen'>
+    <div className=' bg-gradient-to-br from-gray-900 via-gray-600 to-gray-900 h-screen'>
         <div className="flex min-h-full  flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm flex">
           <img

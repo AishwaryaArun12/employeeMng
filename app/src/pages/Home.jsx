@@ -38,7 +38,7 @@ const Home = () => {
        }
       }
   return (
-    <div className='bg-gradient-to-br from-gray-900 via-gray-500 to-gray-900 h-screen'>
+    <div className='bg-gradient-to-br from-gray-900 via-gray-600 to-gray-900 h-screen'>
      <Nav/>
      <div>
      <input  value={value} onChange={handleChange}  placeholder='Search here....'

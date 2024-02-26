@@ -2,25 +2,13 @@ const express = require('express');
 const multer = require('multer');
 const user = require('../controller/users')
 const router = express.Router();
+const auth = require('../middlewears/auth');
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, 'public/img/'); // Save files to the 'uploads' directory
-    },
-    filename: (req, file, cb) => {
-      const uniqueFileName = `${Date.now()}-${file.originalname}`;
-      cb(null, uniqueFileName);
-    },
-  });
-  
-  const upload = multer({ storage });
 
 router.post('/register',user.register);
 router.post('/login', user.login);
-router.get('/getUsers', user.getUsers);
-router.put('/blockUser/:id', user.blockUser);
-router.put('/activeUser/:id', user.activeUser);
-router.put('/editProfile/:id', user.editProfile);
+router.get('/getUsers',auth, user.getUsers);
+router.put('/editProfile/:id',auth, user.editProfile);
 
 
 
