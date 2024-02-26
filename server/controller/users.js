@@ -45,7 +45,7 @@ module.exports  = {
             console.log(error)
         }
     },
-    getUsers : async(req,res)=>{
+    getUser : async(req,res)=>{
         try {
             const {id} = req.params;
             let user = await User.findOne({_id:id});

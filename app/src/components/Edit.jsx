@@ -1,9 +1,8 @@
 
 'use client';
-
-import { Button, Checkbox, Label, Modal, TextInput } from 'flowbite-react';
-import { useState } from 'react';
-import { HiPencil } from 'react-icons/hi';
+import Nav from './Nav';
+import bg from '../assets/bg.webp'
+import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import React from 'react'
 import {useForm} from 'react-hook-form';
@@ -11,25 +10,18 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from '../axiosConfig'
 
-export default function Component({user,set}) {
-  const [user,set] = useState();
-  const {register,handleSubmit} = useForm({
-    defaultValues : {
-        name : user.name,
-        designation : user.designation,
-        mobile : user.mobile,
-        address : user.address
-    }
-  });
+export default function Component() {
+  const [user,set] = useState({});
+  const {register,handleSubmit} = useForm();
   const getUser = async ()=>{
     try {
-       const res = await axios.get(`/get/${localStorage.getItem('id')}/${id}`)
+       const res = await axios.get(`/getUser/${localStorage.getItem('id')}`)
        
-       set(res.data.data);
-       setValue('name', res.data.data[0].name);
-       setValue('salary', res.data.data[0].salary);
-       setValue('job', res.data.data[0].job);
-       
+       set(res.data);
+       setValue('name', res.data.name);
+       setValue('designation', res.data.salary);
+       setValue('mobile', res.data.job);
+       setValue('address', res.data.job);
     } catch (error) {
         console.log(error,'error');
     }
@@ -53,8 +45,7 @@ export default function Component({user,set}) {
         }else{
             try {
                 const edit = await axios.put(`/editProfile/${user._id}`,data);
-                console.log(edit);
-                set(edit.data); 
+                 
                 onCloseModal();  
             } catch (error) {
                 if(error.response?.status == 409){
