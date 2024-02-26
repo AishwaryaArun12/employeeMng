@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const URL = 'http://localhost:10000';
-const mainUrl = 'http://localhost:5173'
+export const URL = 'https://employeemng-server.onrender.com';
+const mainUrl = 'https://employeemng.onrender.com'
 
 const instance = axios.create({
     baseURL: URL,
