@@ -1,4 +1,4 @@
-import React ,{useState} from 'react'
+import React ,{useEffect, useState} from 'react'
 import logo2 from '../assets/logo2.jpg'
 import {useForm} from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
@@ -37,6 +37,11 @@ const Login = () => {
             }
           }
     }
+    useEffect(()=>{
+        if(localStorage.getItem('loginUser')){
+            navigate('/');
+        }
+    },[]);
   
 
   return (

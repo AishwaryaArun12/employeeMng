@@ -20,9 +20,6 @@ app.use(
 );
 
 
-
-app.use(express.static(path.join(__dirname, 'public')));
-
 const db = process.env.mongodb;
 
 mongoose
