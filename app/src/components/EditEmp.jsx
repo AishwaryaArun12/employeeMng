@@ -4,20 +4,37 @@
 import { Button, Checkbox, Label, Modal, TextInput } from 'flowbite-react';
 import { useState,useEffect } from 'react';
 import { HiPencil } from 'react-icons/hi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import React from 'react'
 import {useForm} from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from '../axiosConfig'
 
-export default function Component({emp,set}) {
-  const [openModal, setOpenModal] = useState(false);
-  const {register,handleSubmit} = useForm({
-    defaultValues : {
-        name : emp.name,salary:emp.salary,job:emp.job
+export default function Component() {
+    let { id } = useParams();
+    const [emp,set] = useState({});
+  const {register,handleSubmit,setValue} = useForm();
+  const getEmployee = async ()=>{
+    try {
+       const res = await axios.get(`/employee/get/${localStorage.getItem('id')}/${id}`)
+       set(res.data.data);
+       setValue('name', res.data.data.name);
+       setValue('designation', res.data.data.designation);
+       setValue('mobile', res.data.data.mobile);
+       setValue('address', res.data.data.address);
+       
+    } catch (error) {
+        console.log(error,'error');
     }
-  });
+}
+  useEffect(()=>{
+      if(!localStorage.getItem('loginUser')){
+          navigate('/login');
+      }else{
+          getEmployee();
+      }
+  },[])
     const navigate = useNavigate();
     const submit = async(data)=>{
         const nameRegex = /^[a-zA-Z]{2,}(?:[' -][a-zA-Z]+)*$/;
@@ -44,16 +61,13 @@ export default function Component({emp,set}) {
 
 
   function onCloseModal() {
-    setOpenModal(false);
-    setEmail('');
+    navigate('/')
   }
 
   return (
     <>
       
-      <Modal show={openModal} size="sm" onClose={onCloseModal} popup className='bg-white'>
-        <Modal.Header />
-        <Modal.Body >
+      
           <div className="space-y-6 ">
             <h3 className="text-xl font-medium text-gray-900 text-center dark:text-white">Edit {emp.name}</h3>
             <div className="mt-10  sm:mx-auto sm:w-full sm:max-w-sm">
@@ -138,8 +152,7 @@ export default function Component({emp,set}) {
 
         </div>
           </div>
-        </Modal.Body>
-      </Modal>
+       
     </>
   );
 }

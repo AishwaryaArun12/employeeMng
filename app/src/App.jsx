@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import AddEmployee from './pages/AddEmployee'
 import Profile from './pages/Profile'
+import EditEmp from './components/EditEmp'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route exact path='/' element={<Home/>}/>
         <Route exact path='/add' element={<AddEmployee/>}/>
         <Route exact path='/profile' element={<Profile/>}/>
+        <Route exact path='/editEmp/:id' element={<EditEmp/>}/>
       </Routes>
     </Router>
      

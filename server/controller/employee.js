@@ -34,5 +34,14 @@ module.exports = {
         } catch (error) {
             console.log(error.message)
         }
-    }
+    },
+    get : async(req,res)=>{
+        try {
+            const {userId,empId} = req.params
+            const all = await Employee.find({userId,_id:empId});
+            res.status(200).json({data : all})
+        } catch (error) {
+            console.log(error.message);
+        }
+    },
 }

@@ -1,9 +1,10 @@
 
 'use client';
 import {  Table } from 'flowbite-react';
-import Modal from '../components/Modal';
+import { HiPencil } from 'react-icons/hi';
 
 export default function Component({emps,setemps}) {
+
   return (
     <div className="overflow-x-auto items-center">
       <Table className=' w-11/12 m-5 text-pretty '>
@@ -26,7 +27,10 @@ export default function Component({emps,setemps}) {
           <Table.Cell className="whitespace-nowrap p-2 font-medium text-gray-400 dark:text-white">{emp.salary}</Table.Cell>
           <Table.Cell className="whitespace-nowrap p-2 font-medium text-gray-400 dark:text-white">{emp.job}</Table.Cell>
           <Table.Cell>
-        <Modal emp={emp} set={setemps}/>
+          <a href={`/editEmp/${emp._id}`}  className="font-medium text-gray-300 hover:underline border-gray-500 m-2 items-center flex">
+                <HiPencil/>
+              Edit
+            </a>
           </Table.Cell>
         </Table.Row>)}
          
