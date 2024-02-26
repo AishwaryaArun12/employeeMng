@@ -6,9 +6,12 @@ import bg from '../assets/bg.webp'
 
 const Profile = () => {
     const [user,setUser] = useState({})
+   
     useEffect(()=>{
         setUser(JSON.parse(localStorage.getItem('user')))
-        console.log(JSON.parse(localStorage.getItem('user')))
+        if(!localStorage.getItem('loginUser')){
+            navigate('/login');
+        }
     },[])
   return (
     <div className=' bg-cover bg-center h-screen' style={{ backgroundImage: `url(${bg})` }}>

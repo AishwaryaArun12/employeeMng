@@ -11,6 +11,11 @@ const Signup = () => {
     const [emailError, setEmailError] = useState('');
     const {register,handleSubmit} = useForm();
     const navigate = useNavigate();
+    useEffect(()=>{
+        if(localStorage.getItem('loginUser')){
+            navigate('/');
+        }
+    },[]);
     const submit = async(data)=>{
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const nameRegex = /^[a-zA-Z]{2,}(?:[' -][a-zA-Z]+)*$/;

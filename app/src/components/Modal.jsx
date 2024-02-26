@@ -2,7 +2,7 @@
 'use client';
 
 import { Button, Checkbox, Label, Modal, TextInput } from 'flowbite-react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { HiPencil } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import React from 'react'
@@ -54,13 +54,13 @@ export default function Component({emp,set}) {
                 <HiPencil/>
               Edit
             </Button>
-      <Modal show={openModal} size="sm" onClose={onCloseModal} popup>
+      <Modal show={openModal} size="sm" onClose={onCloseModal} popup className='bg-white'>
         <Modal.Header />
         <Modal.Body >
           <div className="space-y-6 ">
             <h3 className="text-xl font-medium text-gray-900 text-center dark:text-white">Edit {emp.name}</h3>
             <div className="mt-10  sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6 m-3 items-center" onSubmit={handleSubmit(submit)}>
+          <form className=" space-y-6 m-3 items-center" onSubmit={handleSubmit(submit)}>
             <div>
               <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
                 Name

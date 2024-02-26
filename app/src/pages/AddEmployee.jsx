@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import {useForm} from 'react-hook-form';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,6 +10,11 @@ import bg from '../assets/bg.webp'
 const AddEmployee = () => {
     const {register,handleSubmit} = useForm();
     const navigate = useNavigate();
+    useEffect(()=>{
+        if(!localStorage.getItem('loginUser')){
+            navigate('/login');
+        }
+    },[])
     const submit = async(data)=>{
         const nameRegex = /^[a-zA-Z]{2,}(?:[' -][a-zA-Z]+)*$/;
         if(!nameRegex.test(data.name.trim()) || data.name.trim() == ""){
@@ -76,7 +81,7 @@ const AddEmployee = () => {
                   required
                   min={0}
                   {...register('salary')}
-                  className="p-3 bg-gray-200 block w-full rounded-md border-0 py-1.5 text-gray-200 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="p-3 bg-gray-200 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             
