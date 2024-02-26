@@ -3,7 +3,7 @@ require('dotenv').config();
 const Jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
 
-export const jwtAuth = async(req,res,next)=>{
+const jwtAuth = async(req,res,next)=>{
  
     try {
     
@@ -27,3 +27,4 @@ export const jwtAuth = async(req,res,next)=>{
      res.status(401).json({ message: error.message });
    }
  }
+ module.export = jwtAuth;
