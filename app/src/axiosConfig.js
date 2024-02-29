@@ -8,6 +8,7 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
+    
     const token = localStorage.getItem('token');
     const id = localStorage.getItem('id'); 
     if (token) {
@@ -19,9 +20,13 @@ instance.interceptors.request.use((config) => {
 
     return config;
 },
-async (error) => {
+);
+instance.interceptors.response.use((res)=>{
+    return res;
+},async (error) => {
+    console.log('ddddddddddddddd')
     console.log(error.response.status == 401 && window.location.href !== `${mainUrl}/login`,'kkk')
-    if(error.response.status == 401 && !window.location.href == `${mainUrl}/login`){
+    if(error.response.status == 401 && window.location.href !== `${mainUrl}/login`){
         localStorage.removeItem('loginUser');
         localStorage.removeItem('loginAdmin');
         localStorage.removeItem('token');
@@ -30,7 +35,7 @@ async (error) => {
     }else{            
             return Promise.reject(error);    
     }
-});
+})
 
 
 

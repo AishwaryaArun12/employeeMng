@@ -19,6 +19,7 @@ const Home = () => {
          setNames(res.data.data);
       } catch (error) {
           console.log(error,'error');
+          
       }
   }
     useEffect(()=>{
