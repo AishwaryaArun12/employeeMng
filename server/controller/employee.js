@@ -1,7 +1,7 @@
 const Employee = require('../model/employee')
 
 module.exports = {
-    add : async(req,res)=>{
+    add : async(req,res,next)=>{
         try {
             const emp = await Employee.find({empid : req.body.id,userId : id })
             if(emp.length > 0){
@@ -14,34 +14,34 @@ module.exports = {
             }
 
           } catch (error) {
-           console.log(error.message);
+           next(error);
           }
     },
-    getAll : async(req,res)=>{
+    getAll : async(req,res,next)=>{
         try {
             const {id} = req.params
             const all = await Employee.find({userId : id});
             res.status(200).json({data : all})
         } catch (error) {
-            console.log(error.message);
+            next(error);
         }
     },
-    edit : async(req,res)=>{
+    edit : async(req,res,next)=>{
         try {
             const {id} = req.params 
             const edit = await Employee.findOneAndUpdate({_id : id},{$set : req.body},{new:true});
             res.status(200).json(edit)
         } catch (error) {
-            res.status(500).json(error)
+            next(error)
         }
     },
-    get : async(req,res)=>{
+    get : async(req,res,next)=>{
         try {
             const {userId,empId} = req.params
             const all = await Employee.find({userId,_id:empId});
             res.status(200).json({data : all})
         } catch (error) {
-            console.log(error.message);
+            next(error.message);
         }
     },
 }

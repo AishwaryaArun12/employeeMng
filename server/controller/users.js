@@ -4,7 +4,7 @@ const Jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
 
 module.exports  = {
-    register : async(req,res)=>{
+    register : async(req,res,next)=>{
        try {
          const user = await User.find({email : req.body.email})
          if(user.length > 0){
@@ -15,10 +15,10 @@ module.exports  = {
             res.status(200).json({message : 'Success'})
          }
        } catch (error) {
-        console.log(error.message);
+        next(error);
        }
     },
-    login : async(req,res)=>{
+    login : async(req,res,next)=>{
         
         try {
             let user = null;
@@ -34,36 +34,36 @@ module.exports  = {
                 res.status(403).json({error : 'invalid credential'})
             }
         } catch (error) {
-            console.log(error.message);
+            next(error);
         }
     },
-    getUsers : async(req,res)=>{
+    getUsers : async(req,res,next)=>{
         try {
             let users = await User.find();
             res.status(200).json({users})
         } catch (error) {
-            console.log(error)
+            next(error)
         }
     },
-    getUser : async(req,res)=>{
+    getUser : async(req,res,next)=>{
         try {
             const {id} = req.params;
             let user = await User.findOne({_id:id});
             res.status(200).json({user})
         } catch (error) {
-            console.log(error)
+            next(error)
         }
     },
    
     
-    editProfile : async (req,res)=>{
+    editProfile : async (req,res,next)=>{
         try {
             const {id} = req.params;
             const {name,mobile,designation,address} = req.body;
             const edit = await User.findOneAndUpdate({_id:id},{name,mobile,designation,address},{new : true});
             res.status(200).json(edit)
         } catch (error) {
-            console.log(error);
+            next(error);
         }
     },
   

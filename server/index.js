@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const userRouter = require('./routes/userRouter')
 const employeeRouter = require('./routes/employeeRouter');
+const errorMiddleware = require('./middlewears/error');
 require('dotenv').config();
 const path = require('path');
 const app = express();
@@ -30,5 +31,6 @@ mongoose
   .catch(err => console.log(err));
   app.use('/',userRouter);
 app.use('/employee', employeeRouter);
+app.use(errorMiddleware)
 const port = process.env.PORT || 10000; 
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
