@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const URL = 'https://employeemng-server.onrender.com';
-const mainUrl = 'https://employeemng.onrender.com'
+const mainUrl = 'https://employee-mng-nine.vercel.app'
 
 const instance = axios.create({
     baseURL: URL,
@@ -18,6 +18,19 @@ instance.interceptors.request.use((config) => {
     }
 
     return config;
+},
+async (error) => {
+    const originalRequest = error.config;
+    
+    if(error.response.status === 401 && !window.location.href == `${mainUrl}/login`){
+        localStorage.removeItem('loginUser');
+        localStorage.removeItem('loginAdmin');
+        localStorage.removeItem('token');
+        window.location.href = '/login';     
+        return ;
+    }else{            
+            return Promise.reject(error);    
+    }
 });
 
 

@@ -31,7 +31,7 @@ module.exports  = {
                 const token = Jwt.sign({ id:user._id }, jwtSecret, { expiresIn: '1h' });
                 res.status(200).json({token,user,admin : false});
             }else{
-                res.status(401).json({error : 'invalid credential'})
+                res.status(403).json({error : 'invalid credential'})
             }
         } catch (error) {
             console.log(error.message);
