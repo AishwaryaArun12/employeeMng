@@ -20,8 +20,7 @@ instance.interceptors.request.use((config) => {
     return config;
 },
 async (error) => {
-    const originalRequest = error.config;
-    console.log(error.response.status == 401 && !window.location.href == `${mainUrl}/login`,'kkk')
+    console.log(error.response.status == 401 && window.location.href !== `${mainUrl}/login`,'kkk')
     if(error.response.status == 401 && !window.location.href == `${mainUrl}/login`){
         localStorage.removeItem('loginUser');
         localStorage.removeItem('loginAdmin');
