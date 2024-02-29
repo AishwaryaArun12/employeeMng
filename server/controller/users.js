@@ -40,7 +40,7 @@ module.exports  = {
     getUsers : async(req,res)=>{
         try {
             let users = await User.find();
-            res.json({users})
+            res.status(200).json({users})
         } catch (error) {
             console.log(error)
         }
@@ -49,7 +49,7 @@ module.exports  = {
         try {
             const {id} = req.params;
             let user = await User.findOne({_id:id});
-            res.json({user})
+            res.status(200).json({user})
         } catch (error) {
             console.log(error)
         }

@@ -21,7 +21,7 @@ export default function Component({emps,setemps}) {
           {emps.map((emp)=>
           <Table.Row className="bg-transparent shadow-lg  text-center border-gray-500 dark:bg-gray-800">
           <Table.Cell className="whitespace-nowrap p-3 font-medium text-gray-400 ">
-            {emp._id}
+            {emp.empid}
           </Table.Cell>
           <Table.Cell className="whitespace-nowrap p-2 font-medium text-gray-400 dark:text-white">{emp.name}</Table.Cell>
           <Table.Cell className="whitespace-nowrap p-2 font-medium text-gray-400 dark:text-white">{emp.salary}</Table.Cell>

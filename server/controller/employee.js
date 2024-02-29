@@ -3,9 +3,9 @@ const Employee = require('../model/employee')
 module.exports = {
     add : async(req,res)=>{
         try {
-            const emp = await Employee.find({name : req.body.name})
+            const emp = await Employee.find({empid : req.body.id})
             if(emp.length > 0){
-               res.status(409).json({error : 'Employee already exist'})
+               res.status(409).json({error : 'Employee already exist with same id'})
             }else{
                 const {id} = req.params;
                const newEmployee = new Employee({...req.body,userId : id });

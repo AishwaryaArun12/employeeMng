@@ -14,7 +14,6 @@ import Nav from './Nav';
 
 export default function Component() {
     const { id } = useParams();
-    console.log(id,'ddd')
     const [emp,set] = useState({});
   const {register,handleSubmit,setValue} = useForm();
   const getEmployee = async ()=>{
@@ -22,6 +21,7 @@ export default function Component() {
        const res = await axios.get(`/employee/get/${localStorage.getItem('id')}/${id}`)
        
        set(res.data.data);
+       setValue('id', res.data.data[0].empid);
        setValue('name', res.data.data[0].name);
        setValue('salary', res.data.data[0].salary);
        setValue('job', res.data.data[0].job);
@@ -49,10 +49,9 @@ export default function Component() {
         }else{
             
                 try {
-                    console.log('object')
-                    const edit = await axios.post(`/employee/edit/${id}`,data);
-                    console.log(edit,'fffffff');
                     
+                    const edit = await axios.post(`/employee/edit/${id}`,data);
+
                     onCloseModal();  
                 } catch (error) {
                     console.log(error)
