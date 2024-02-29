@@ -38,11 +38,11 @@ const AddEmployee = () => {
 
     }
   return (
-    <div className=' bg-cover bg-center h-screen' style={{ backgroundImage: `url(${bg})` }}>
+    <div className=' bg-cover bg-center h-auto' style={{ backgroundImage: `url(${bg})` }}>
         <Nav/>
-        <div className='flex min-h-full  flex-1 flex-col  px-6 py-12  lg:px-8'>
+        <div className='flex  flex-1 flex-col  px-6 py-9  lg:px-8'>
       <div>
-      <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-200">
+      <h2 className=" text-center text-2xl font-bold leading-9 tracking-tight text-gray-200">
             Add New Employee
           </h2>
       </div>
