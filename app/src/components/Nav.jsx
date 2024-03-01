@@ -23,7 +23,7 @@ const Nav = () => {
         <nav className='shadow-2xl flex items-center justify-between text-gray-300 text-md font-semibold bg-transparent border-b w-full p-4'>
             <div className="flex items-center flex-shrink-0 mr-6">
                 <img src={logo2} className='h-12 bg-transparent w-auto rounded-full' alt="" />
-                <a href='/' className='ml-2 text-lg font-bold tracking-wide'>Employee Management</a>
+                <a href='/' id='logo' className='ml-2 text-lg font-bold tracking-wide animate-blink '>Employee Management</a>
             </div>
             <div className="block lg:hidden">
                 <button onClick={toggleMenu} className="flex items-center px-3 py-2 border rounded text-white border-white hover:text-gray-900 hover:border-transparent">
