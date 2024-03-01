@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import logo2 from '../assets/logo2.jpg';
-import { HiUserAdd, HiLogout, HiUserCircle } from 'react-icons/hi';
+import { HiUserAdd, HiLogout, HiUserCircle, HiUser } from 'react-icons/hi';
 import { MdDashboard } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
@@ -45,14 +45,9 @@ const Nav = () => {
                 </div>
             </div>
             <div className="hidden lg:block lg:w-auto">
-                <a href='/' className='block mt-4 lg:inline-block lg:mt-0 mr-4'>
-                    <MdDashboard className='inline-block mr-1' />Dashboard
-                </a>
-                <a href='/add' className='block mt-4 lg:inline-block lg:mt-0 mr-4'>
-                    <HiUserAdd className='inline-block mr-1' />Add Employee
-                </a>
+                
                 <a href='/profile' className='block mt-4 lg:inline-block lg:mt-0 mr-4'>
-                    <HiUserCircle className='inline-block mr-1' />Profile
+                    <HiUser className='inline-block mr-1' />Welcome back to {JSON.parse(localStorage.getItem('user')).name}
                 </a>
             </div>
             <div className="hidden lg:block lg:w-auto">

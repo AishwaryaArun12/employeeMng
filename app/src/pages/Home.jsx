@@ -4,6 +4,8 @@ import Nav from '../components/Nav';
 import Table from '../components/Table';
 import axios from '../axiosConfig';
 import bg from '../assets/bg.webp'
+import Sidebar from '../components/Sidebar';
+
 
 const Home = () => {
     const navigate = useNavigate();
@@ -42,7 +44,10 @@ const Home = () => {
   return (
     <div className=' bg-cover bg-center h-screen' style={{ backgroundImage: `url(${bg})` }}>
      <Nav/>
-     <div>
+     <div className=' grid grid-flow-col-dense'>
+        <Sidebar/>
+        <div className=' col-span-6'>
+        <div>
      <input  value={value} onChange={handleChange}  placeholder='Search here....'
       className='h-10  placeholder:text-gray-700 bg-gray-200 rounded-full  text-black w-1/4 m-5 p-2 shadow-md border-gray-500 border-2 ' />
      </div>
@@ -51,8 +56,10 @@ const Home = () => {
         <Table emps={employees} setemps={setEmployees}/>
         </>:
        <div className='w-full text-center font-semibold text-lg'>
-         <p className='text-center'> No Employees Saved Yet.</p>
+         <p className='text-center text-gray-400'> No Employees Saved Yet.</p>
          </div>}
+     </div>
+        </div>
      </div>
     </div>
   )

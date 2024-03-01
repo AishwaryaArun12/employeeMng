@@ -25,8 +25,8 @@ instance.interceptors.response.use((res)=>{
     return res;
 },async (error) => {
     console.log('ddddddddddddddd')
-    console.log(error.response.status == 401 && window.location.href !== `${mainUrl}/login`,'kkk')
-    if(error.response.status == 401 && window.location.href !== `${mainUrl}/login`){
+    console.log(error.response?.status == 401 && window.location.href !== `${mainUrl}/login`,'kkk')
+    if(error.response?.status == 401 && window.location.href !== `${mainUrl}/login`){
         localStorage.removeItem('loginUser');
         localStorage.removeItem('loginAdmin');
         localStorage.removeItem('token');

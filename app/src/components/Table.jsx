@@ -1,41 +1,82 @@
 
 'use client';
-import {  Table } from 'flowbite-react';
+import DataTable,{createTheme} from 'react-data-table-component';
 import { HiPencil } from 'react-icons/hi';
 
 export default function Component({emps,setemps}) {
+    createTheme('solarized', {
+        text: {
+            primary: '#D1D5DB',
+            secondary: '#D1D5DC',
+        },
+        background: {
+            default: '#000A19',
+        },
+        context: {
+            background: '#cb4b16',
+            text: '#FFFFFF',
+        },
+        divider: {
+            default: '#073642',
+        },
+        button: {
+            default: '#2aa198',
+            hover: 'rgba(0,0,0,.08)',
+            focus: 'rgba(255,255,255,.12)',
+            disabled: 'rgba(255, 255, 255, .34)',
+        },
+        sortFocus: {
+            default: '#2aa198',
+        },
+    });
+    const columns = [
+        {
+            name: 'Employee Id',
+            selector: row => row.empid,
+            sortable: true,
+        },
+        {
+            name: 'Name',
+            selector: row => row.name,
+            sortable: true,
+        },
+        {
+            name: 'Salary',
+            selector: row => row.salary,
+            sortable: true,
+        },
+        {
+            name: 'Job Position',
+            selector: row => row.job,
+            sortable: true,
+        },
+        {
+            name: 'Edit',
+            cell: row => (
+                <a href={`/editEmp/${row._id}`} className="bg-blue-950 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">
+                    <HiPencil />
+                </a>
+            ),
+            ignoreRowClick: true,
+            allowOverflow: true,
+            button: true,
+        }
+    ];
+    const data = emps;
+    
 
   return (
-    <div className="overflow-x-auto items-center">
-      <Table className=' w-11/12 m-5 text-pretty '>
-        <Table.Head className='text-lg text-gray-200 p-2 border-b border-black'>
-          <Table.HeadCell className='p-3'>Employee Id</Table.HeadCell>
-          <Table.HeadCell>Name</Table.HeadCell>
-          <Table.HeadCell>Salary</Table.HeadCell>
-          <Table.HeadCell>Job Position</Table.HeadCell>
-          <Table.HeadCell>
-            <span className="sr-only">Edit</span>
-          </Table.HeadCell>
-        </Table.Head>
-        <Table.Body className="divide-y">
-          {emps.map((emp)=>
-          <Table.Row className="bg-transparent shadow-lg  text-center border-gray-500 dark:bg-gray-800">
-          <Table.Cell className="whitespace-nowrap p-3 font-medium text-gray-400 ">
-            {emp.empid}
-          </Table.Cell>
-          <Table.Cell className="whitespace-nowrap p-2 font-medium text-gray-400 dark:text-white">{emp.name}</Table.Cell>
-          <Table.Cell className="whitespace-nowrap p-2 font-medium text-gray-400 dark:text-white">{emp.salary}</Table.Cell>
-          <Table.Cell className="whitespace-nowrap p-2 font-medium text-gray-400 dark:text-white">{emp.job}</Table.Cell>
-          <Table.Cell>
-          <a href={`/editEmp/${emp._id}`}  className="font-medium text-gray-300 hover:underline border-gray-500 m-2 items-center flex">
-                <HiPencil/>
-              Edit
-            </a>
-          </Table.Cell>
-        </Table.Row>)}
-         
-        </Table.Body>
-      </Table>
+    <div className="m-3 bg-transparent">
+      <DataTable
+            columns={columns}
+            data={data}
+            pagination={true}
+            paginationRowsPerPageOptions={[6,10]}
+            paginationPerPage={6}
+            theme={'solarized'}
+            
+            className='bg-transparent'
+        />
     </div>
   );
 }
