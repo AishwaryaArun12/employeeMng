@@ -47,7 +47,7 @@ const Nav = () => {
             <div className="hidden lg:block lg:w-auto">
                 
                 <a href='/profile' className='block mt-4 lg:inline-block lg:mt-0 mr-4'>
-                    <HiUser className='inline-block mr-1' />Welcome back to {JSON.parse(localStorage.getItem('user')).name}
+                    <HiUser className='inline-block mr-1 mb-1' />Welcome back to {JSON.parse(localStorage.getItem('user')).name}
                 </a>
             </div>
             <div className="hidden lg:block lg:w-auto">

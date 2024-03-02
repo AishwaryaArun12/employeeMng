@@ -22,25 +22,22 @@
 
   
 @keyframes blink {
-  0% {
+  0%,100% {
     opacity: 0;
   }
-  25%{
+  20%{
     opacity: 1;
   }
-  50% {
-    opacity: 1;
-  }
+  
   75%{
     opacity: 1;
-    transform: translateY(-10px);
+    transform: translateY(-8px);
   }
   85%{
-    transform: translateY(0);
+    opacity: 1;
+    transform: translateY(8px);
   }
-  100% {
-    opacity: 0;
-  }
+  
 }
 
 .animate-blink {
