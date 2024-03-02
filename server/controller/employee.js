@@ -11,7 +11,7 @@ module.exports = {
                 
                const newEmployee = new Employee({...req.body,userId : id });
                newEmployee.save();
-               res.status(200).json({message : 'Success'})
+               res.status(200).json({message : 'Success',newEmp:newEmployee})
             }
 
           } catch (error) {
