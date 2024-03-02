@@ -9,8 +9,8 @@ module.exports = {
                res.status(409).json({error : 'Employee already exist with same id'})
             }else{
                 
-               const newEmployee = new Employee({...req.body,userId : id });
-               newEmployee.save();
+               const newEmployee = await Employee.create({...req.body,userId : id });
+               
                res.status(200).json({message : 'Success',newEmp:newEmployee})
             }
 
