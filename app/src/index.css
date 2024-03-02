@@ -1,17 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-  
-#logo{
-  font-family: Arial, Helvetica, sans-serif   ;
+
+@font-face {
+  font-family: 'popins';
+  src: url('/fonts/static/JosefinSans-Light.ttf') format('truetype');
+  font-weight:lighter;
+  font-style:normal;
 }
+*{
+  font-family: 'popins';
+}
+@font-face {
+  font-family: 'fontlogo';
+  src: url('/fonts/static/DancingScript-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+
+
+  
 @keyframes blink {
   0% {
     opacity: 0;
   }
+  25%{
+    opacity: 1;
+  }
   50% {
     opacity: 1;
+  }
+  75%{
+    opacity: 1;
+    transform: translateY(-10px);
+  }
+  85%{
+    transform: translateY(0);
   }
   100% {
     opacity: 0;
