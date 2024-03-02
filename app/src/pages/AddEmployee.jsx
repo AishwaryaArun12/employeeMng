@@ -29,7 +29,8 @@ const AddEmployee = () => {
             try {
                 console.log(localStorage.getItem('id'),'hhhh')
                 const add = await axios.post(`/employee/add/${localStorage.getItem('id')}`,data);
-                navigate('/')  
+                console.log(add)
+               // navigate('/')  
             } catch (error) {
                 if(error.response.status == 409){
                     toast('Employee already exist with same id');
