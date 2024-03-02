@@ -27,6 +27,7 @@ const AddEmployee = () => {
             toast('Salary should be greater than 0');
         }else{
             try {
+                console.log(localStorage.getItem('id'),'hhhh')
                 const add = await axios.post(`/employee/add/${localStorage.getItem('id')}`,data);
                 navigate('/')  
             } catch (error) {
