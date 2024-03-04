@@ -29,8 +29,8 @@ const AddEmployee = () => {
             try {
                 
                 const add = await axios.post(`/employee/add/${localStorage.getItem('id')}`,data);
-                console.log(add)
-               // navigate('/')  
+                
+                navigate('/')  
             } catch (error) {
                 console.log(error)
                 if(error.response.status == 409){
