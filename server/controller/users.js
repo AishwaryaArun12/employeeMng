@@ -8,7 +8,7 @@ module.exports  = {
        try {
          const user = await User.find({email : req.body.email})
          if(user.length > 0){
-            res.status(500).json({error : 'You already registered, Please login..'})
+            res.status(409).json({error : 'You already registered, Please login..'})
          }else{
             const newUser = new User(req.body);
             newUser.save();
