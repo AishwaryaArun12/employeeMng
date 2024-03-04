@@ -60,7 +60,7 @@ const AddEmployee = () => {
                 <input
                   id="id"
                   name="id"
-                  type="number"
+                  type='text'
                   autoComplete="id"
                   required
                   pattern="[A-Za-z0-9]+"
